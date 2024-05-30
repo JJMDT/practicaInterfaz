@@ -35,6 +35,10 @@ namespace practicaInterfaz
                 switch (opcion)
                 {
                     case 1:
+                        bool agregarJugador = true;
+                        while (agregarJugador)
+                        {
+
                         Console.WriteLine("carga de datos del jugador");
                         Console.WriteLine("ingresar nombre");
                         string nombre = Console.ReadLine();
@@ -45,12 +49,25 @@ namespace practicaInterfaz
                         Console.WriteLine("ingresar nro de posicion");
                         int posicion = int.Parse(Console.ReadLine());
                         Console.WriteLine("ingresar la categoria");
-                        string categoria= Console.ReadLine();
+                        string categoria = Console.ReadLine();
 
-                        integrantes.Add (new Jugador(nombre,apellido,edad,posicion,categoria));
+                        integrantes.Add(new Jugador(nombre, apellido, edad, posicion, categoria));
+
+                            Console.WriteLine("queres agregar otro jugador? s/n");
+                            string resp= Console.ReadLine();
+                            
+                            if(resp != "s" )
+                            {
+                                agregarJugador= false;
+                            }
+                        }
                         break;
 
                     case 2:
+                        bool agregarEntrenador = true;
+                        while (agregarEntrenador)
+                        {
+
                         Console.WriteLine("carga de datos del entrenador");
                         Console.WriteLine("ingresar nombre");
                         string nombreE= Console.ReadLine();
@@ -62,6 +79,14 @@ namespace practicaInterfaz
                         int expE = int.Parse(Console.ReadLine());
 
                         integrantes.Add(new Entrenador(nombreE, apellidoE, edadE, expE));
+
+                            Console.WriteLine("agregar otro entrenador? s/n");
+                            string resp = Console.ReadLine();
+                            if(resp != "s")
+                            {
+                                agregarEntrenador= false;
+                            }
+                        }
                         break;
 
                     case 3:
