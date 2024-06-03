@@ -29,7 +29,7 @@ namespace practicaInterfaz
             while (continuar)
             {
                 Console.WriteLine("ingrese una opcion");
-                Console.WriteLine(" 1-agregar jugador \n 2-agregar entrenador \n 3-ver reporte de jugadores \n 4-ver reporte de entrenadores \n 5-salir");
+                Console.WriteLine(" 1-agregar jugador \n 2-agregar entrenador \n 3-ver reporte de jugadores \n 4-ver reporte de entrenadores \n 5-lista de personas por nombre \n 6-buscar persona por nombre \n 7-modificar nombre \n 8-salir");
                 int opcion = int.Parse(Console.ReadLine());
 
                 switch (opcion)
@@ -90,13 +90,22 @@ namespace practicaInterfaz
                         break;
 
                     case 3:
-                        Console.WriteLine("mostrando reporte");
+
+                        if (integrantes.Count > 0)
+                        {
+                        Console.WriteLine("reporte de jugadores");
+
+
                         foreach (var item in integrantes)
                         {
                             if( item is Jugador jugador)
                             {
-                                jugador.MostrarInfo();
+                                jugador.GetNombre();
                             }
+                        }
+                        } else
+                        {
+                            Console.WriteLine("no hay reporte de jugadores");
                         }
                         break;
 
@@ -106,11 +115,74 @@ namespace practicaInterfaz
                         {
                             if(item is Entrenador entrenador)
                             {
-                                entrenador.MostrarInfo();
+                                entrenador.GetNombre();
                             }
                         }
                         break;
+                    
                     case 5:
+                        Console.WriteLine("reporte de personas por nombre");
+                        foreach (var item in integrantes)
+                        {
+                            if (item is Integrante persona)
+                            {
+                                persona.GetNombre();
+                            }
+                        }
+                        break;
+                    case 6:
+                        Console.WriteLine("buscar persona por nombre");
+                        Console.WriteLine("ingrese el nombre");
+                        string nombreBuscado = Console.ReadLine();
+                        var encontrados = integrantes.FindAll(i => i.nombre.Equals(nombreBuscado, StringComparison.OrdinalIgnoreCase));
+
+                        if (encontrados.Count > 0)
+                        {
+                            Console.WriteLine("personas encontradas");
+                            // encontrados[0].MostrarInfo();
+                            foreach (var item in encontrados)
+                            {
+                                item.MostrarInfo();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("no hay resultados");
+                        }
+                        break;
+                    case 7:
+                        Console.WriteLine("ingrese el nombre");
+                        string nombreActual = Console.ReadLine();
+                        var personasEncontradas = integrantes.FindAll(i => i.nombre.Equals(nombreActual, StringComparison.OrdinalIgnoreCase));
+
+                        if (personasEncontradas.Count > 0)
+                        {
+                            Console.WriteLine("personas encontradas");
+                            // encontrados[0].MostrarInfo();
+                            for (int i = 0; i < personasEncontradas.Count; i++)
+                            {
+                                Console.WriteLine($"{i + 1}. {personasEncontradas[i].nombre} {personasEncontradas[i].apellido}");
+                            }
+                            Console.WriteLine("ingrese el numero d la persona que quiere modificar");
+                            int indice = int.Parse(Console.ReadLine())-1;
+                            if(indice >= 0 && indice < personasEncontradas.Count)
+                            {
+                                Console.WriteLine("ingrese el nuevo nombre");
+                                string nuevoNombre = Console.ReadLine();
+                                personasEncontradas[indice].SetNombre(nuevoNombre);
+                                Console.WriteLine("nombre cambiado con exito");
+                            }
+                            else
+                            {
+                                Console.WriteLine("seleccion incorrecta");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("no hay resultados");
+                        }
+                        break;
+                    case 8:
                         Console.WriteLine("saliendo");
                         continuar = false;
                         break;

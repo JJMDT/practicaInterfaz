@@ -10,7 +10,7 @@ namespace practicaInterfaz
     {
           void MostrarInfo();
           void SetNombre(string nuevoNombre);
-          void GetNombre();
+          string GetNombre();
 
     }
 }

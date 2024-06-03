@@ -14,9 +14,10 @@ namespace practicaInterfaz
 
         public Integrante(string nombre, string apellido,int edad) { }
 
-        public void GetNombre()
+        public string GetNombre()
         {
-            Console.WriteLine("su nombre es {0}",nombre);
+            Console.WriteLine("{0} {1}",nombre,apellido);
+            return nombre;
         }
 
         public abstract void MostrarInfo();
